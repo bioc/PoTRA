@@ -1,0 +1,433 @@
+---
+title: <b><font color = "SteelBlue">Pathways of Topological Rank Analysis (PoTRA)</b></font>
+author: "Vignette Author: Margaret Linan, MS, MPH"
+date: "February 7, 2019, Revised: February 22, 2019"
+output: 
+    BiocStyle::html_document:
+                    number_sections: true
+vignette: >
+    %\VignetteIndexEntry{Pathways of Topological Rank Analysis (PoTRA)}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}  
+---
+
+<div style="background-color:white">
+  <h1><b>Table of Contents</b></h1>
+  <ol>
+  <a href="#Abstract"><h5 style="color:SteelBlue;"><dt>Abstract</dt></h5></a>
+  <a href="#Introduction"><h5 style="color:SteelBlue;"><dt>Introduction</dt></h5></a> 
+  <a href="#Install_Guide"><h5 style="color:SteelBlue;"><dt>Installation</dt></h5></a>
+  <a href="#Parameters"><h5 style="color:SteelBlue;"><dt>Parameters</dt></h5></a> 
+  <a href="#Parameters"><h6 style="color:SteelBlue;"><dd>Arguements</dd></h6></a> 
+  <a href="#Parameters"><h6 style="color:SteelBlue;"><dd>Values</dd></h6></a> 
+  <a href="#Pathway Databases"><h5 style="SteelBlue;"><dt>Using Pathway Databases with PoTRA</dt></h5></a> 
+  <a href="#Example 1"><h6 style="color:SteelBlue;"><dd>Example 1: Detecting Dysregulated Pathways with Kegg</dd></h6></a> 
+  <a href="#Example 1"><h6 style="color:SteelBlue;"><dd>Example 2: Detecting Dysregulated Pathways with Reactome</dd></h6></a> 
+  <a href="#Example 2"><h6 style="color:SteelBlue;"><dd>Example 3: Detecting Dysregulated Pathways with Biocarta</dd></h6></a> 
+  <a href="#Example 3"><h6 style="color:SteelBlue;"><dd>Example 4: Detecting Dysregulated Pathways with PharmGKB</dd></h6></a> 
+  <a href="#Ranking"><h5 style="color:SteelBlue;"><dt>Ranking Pathways</dt></h5></a> 
+  <a href="#Session Info"><h5 style="color:SteelBlue;"><dt>Session Info</dt></h5></a> 
+  <a href="#References"><h5 style="color:SteelBlue;"><dt>References</dt></h5></a> 
+  </ol>
+</div>
+ 
+
+<a name="Abstract"></a> 
+<h1><b>1        Abstract</b></h1>  
+
+The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease (1). We use PageRank to measure the relative topological ranks ofgenes in each biological pathway, then select hub genes for each pathway, and use Fisher’s exact test to test if the number of hub genes in each pathway is altered from normal to cancer (1). Alternatively, if the distribution of topological ranks of gene in a pathway is altered between normal and cancer, this pathway might also be involved in cancer (1). Hence, we use the Kolmogorov–Smirnov test to detect pathways that have an altered distribution of topological ranks of genes between two phenotypes (1). PoTRA can be used with the KEGG, Biocarta, Reactome, NCI, SMPDB and PharmGKB databases from the devel graphite library.  
+
+
+
+<a name="Introduction"></a>  
+<h1><b>2        Introduction</b></h1>
+<h6><i>Note: The following contains excerpts from (Li, Liu and Dinu, 2018)</i></h6>
+ 
+<h5 style="color:SteelBlue;"><dt>Differential Network Analysis</dt></h5></a> 
+
+Most of the approaches for topology-based network and pathway analysis are based on different correlation-based metrics to identify differential networks between two different phenotypes. Generally, there are three main ways to compare networks for differential network analysis. The first approach handles weighted networks and uses some functions of the edge-specific weight differences as edge weights to construct differential networks (Hudson, Reverter & Dalrymple, 2009; Tesson, Breitling & Jansen, 2010; Liu et al., 2010; Rhinn et al., 2013). The second approach tries to find co-expressed gene sets and identify which correlation patterns are different between sets across conditions (Watson, 2006; Rahmatallah, Emmert-Streib & Glazko, 2014). This approach formulates summary measures that represent co-expression in a biological network and compares the metric between sets. The third approach compares the topology of biological networks across different phenotypes by using measures such as degree of nodes or modularity (Reverter et al., 2006; Zhang et al., 2009). However, the PoTRA method uses a topology-based metric to identify differential networks between two phenotypes. In addition to using different metrics, some of the other tools are based on correlation pattern of genes and identify groups of genes whose correlation patterns behave differentially across different datasets (Watson, 2006; Hudson, Reverter & Dalrymple, 2009; Tesson, Breitling & Jansen, 2010; Liu et al., 2010; Rhinn et al., 2013). Compared to these tools, PoTRA is directly based on topological ranks of genes and aims to identify pathways where the topological ranks of genes are different across datasets, which is more biologically intuitive. In this method, not only do we use correlation networks but we also use combined networks by taking intersected networks of correlation networks and KEGG curated pathways. Hence, when KEGG curated pathway information is employed, the topological rank-based PoTRA method can apply to the combined networks, while the previous correlation-based methods cannot, which is a limitation of the previously discussed correlation-only based methods. Regarding the previous tools based on topology (Reverter et al., 2006; Zhang et al., 2009), Zhang et al. focuses on identifying genes involved in topological changes, while PoTRA focuses on identifying pathways involved in topological changes. Also, Reverter et al. focuses on identifying genes with differential connectivity between two phenotypes, which is also different from PoTRA’s application scenario.
+
+<h5 style="color:SteelBlue;"><dt>Limitations</dt></h5></a> 
+
+Although the above methods for differential network analysis can deal with some important biological questions, they are still limited. In general, they are based on a basic hypothesis that some connections between genes across the groups could be thought of as “passenger” events and other connections are unique to either one of groups and thus could be “driver” events that contribute to disease progression and development. Hence, they focus on the contribution of individual differential connections to disease. This results in several limitations. First, each differential connection is regarded by these methods to have an equal contribution to disease. However, it is well understood that loss of a connection between two hub genes from normal to disease is more deleterious than loss of a connection between two non-hub genes. Second, how differential connections (“driver” connections mentioned above) between pairs of genes are associated with diseases is still not very biologically intuitive, because how the dependency between genes contributes to diseases is usually little understood.
+
+<h5 style="color:SteelBlue;"><dt>The PoTRA Approach</dt></h5></a> 
+
+To address these problems, we propose a new PageRank-based method called Pathways of Topological Rank Analysis (PoTRA) to detect pathways associated with cancer. PageRank is an algorithm initially used by Google Search to rank websites in their search engine results (Page et al., 1999). It is a way of measuring the importance of nodes in a network. More generally, PageRank has been applied to other networks, e.g., social networks (Pedroche et al., 2013; Wang et al., 2013). To date, there have been several studies using PageRank for gene expression and network analysis (Morrison et al., 2005; Winter et al., 2012; Kimmel & Visweswaran, 2013; Hou & Ma, 2014; Bourdakou, Athanasiadis & Spyrou, 2016; Zeng et al., 2016; Ramsahai et al., 2017; Morshed Osmani & Rahman, 2007). These studies focus on ranking genes and discovering key driver genes in disease, and do not try to detect dysregulated pathways involved in disease. Other studies (Winter et al., 2012; Zeng et al., 2016) use PageRank to select topological important genes and simply see which pathways that these topological important genes are involved in. These PageRank-related approaches are very different from our approach.
+
+Our approach embodied by PoTRA is motivated by the observation that the loss of connectivity is a common topological trait of cancer networks (Anglani et al., 2014), as well as the prior knowledge that a normal biological network includes a small number of well-connected hub nodes and a large number of nodes that are non-hubs (Albert, 2005; Khanin & Wit, 2006; Zhu, Gerstein & Snyder, 2007). However, from normal to cancer, the process of the network losing connectivity might be the process of disrupting the structure of the network, namely, the number of hub genes might be altered in cancer compared to that in normal or the distribution of topological ranks of genes might be altered. Thus, we hypothesize that if the number of hub genes is different in a pathway between normal and cancer, this pathway might be involved in cancer. Based on this hypothesis, we propose to detect pathways involved in cancer by testing if the number of hub genes for each pathway is different between normal and cancer samples.
+
+<h5 style="color:SteelBlue;"><dt>Dysregulated Pathway Detection with PoTRA and TCGA BRCA</dt></h5></a> 
+
+The TCGA BRCA open access HTSEQ normalized gene expression data was used with PoTRA to determine if any pathways were significantly dysregulated between normal and case samples. In a 2018 PeerJ preprint the authors conducted a dispersion analysis to determine the thresholds for the number of normal and cases (2). The thresholds were: Normals - 50 samples, Cases - 50 samples. These sample sizes were associated with the smallest standard deviation in pathway ranks. This dispersion analysis is part of a larger collaborative project between the Mayo Clinic and Arizona State University that yielded a pan-cancer study of the TCGA data repository.
+
+<a name="Install_Guide"></a> 
+<h1><b>3       Installation</b></h1>  
+<b>Installation from Bioconductor (recommended)</b> <br />
+The most reliable way to install the package is to use the following Bioconductor method: <br />
+
+Try http:// if https:// URLs are not supported <br />
+if (!requireNamespace("BiocManager", quietly=TRUE)) <br />
+    install.packages("BiocManager") <br />
+BiocManager::install("PoTRA") <br />
+
+<a name="Parameters"></a> 
+<h1><b>4        Parameters</b></h1>  
+ 
+<h4 style="color:SteelBlue;">Arguements</h4>
+  
+
+- mydata - A gene expression dataset (dataframe). Rows represent genes, and columns represent samples (from control to case). A minimum of 50 controls and 50 cases is recommended. Row names must represent gene identifiers (entrez). A minimum of 18,000 genes are recommended.
+- genelist - A list of gene names (entrez).  
+- Number.sample.normal - The number of normal samples.  
+- Number.sample.case - The number of case samples.
+- Pathway.database - The pathway database used in the study, such as, KEGG, Biocarta and PharmGKB. 
+- PR.quantile - The percentile of PageRank scores as a cutoff for hub genes. A value of 0.95 is recommended.
+
+
+   
+<h4 style="color:SteelBlue;">Values</h4>
+
+- Fishertest.p.value - The p-value of the Fisher’s exact test.   
+- KStest.p.value - The p-value of the K.S. test.    
+- LengthOfPathway - The length of pathways.    
+- TheNumberOfHubGenes.normal - The number of hub genes for normal samples.  
+- TheNumberOfHubGenes.case - The number of hub genes for cancer samples.    
+- TheNumberOfEdges.normal - The number of edges in the network for normal samples.    
+- TheNumberOfEdges.case - The number of edges in the network for cancer samples.    
+- Pathways - The list of pathways provided by the specified database (KEGG, Reactome, Biocarta, PharmGKB)
+
+<a name="Pathway Databases"></a>
+<h1><b>5       Using Pathway Databases with PoTRA</b></h1>
+
+The following examples utilize the KEGG, Reactome, BioCarta and PharmGKB databases. Kanehisa Laboratories developed KEGG and has been updating it since 1995, it is an important resource for signaling and metabolic pathways (3). The BioCarta biotech company supports the BioCarta community forum, also known as the Biocarta database. The scientific community contributes to the forum and constantly updates it with new proteomic information. Reactome is one of the most comprehensive databases for signaling and metabolic molecules and describes how they relate to pathways and processes (4). PharmGKB is a well known comprehensive resource and describes how genetic variants impact drug response. The PharmGKB database primarily serves as a important resource for metabolic data analyses.
+
+
+<a name="Example 1"></a>
+<h4 style="color:SteelBlue;">Example 1: Using PoTRA with KEGG</h4>
+
+library(PoTRA) <br />
+library(repmis) <br />
+options(warn=-1) <br />
+library(BiocGenerics) <br />
+library(graph) <br />
+library(graphite) <br />
+library(igraph) <br />
+
+<b>Download the example dataset</b> <br />
+source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-vignette.RData") <br />
+ 
+<b>Choose your database before running the PoTRA commandline:</b>
+ 
+humanKEGG <- pathways("hsapiens", "kegg") <br />
+Pathway.database = humanKEGG <br />
+
+ 
+<b>Run the PoTRA program with KEGG:</b>
+
+results.KEGG <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=113, Num.sample.case=113, Pathway.database=Pathway.database[1:15], PR.quantile=PR.quantile)
+
+
+```{r results1, include=FALSE}
+install.packages('repmis', repos='http://cran.us.r-project.org')
+library(PoTRA)
+library(graphite)
+library(graph)
+library(igraph)
+library(repmis)
+source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-vignette.RData")
+
+options(warn=-1)
+humanKEGG <- pathways("hsapiens", "kegg") 
+Pathway.database = humanKEGG  
+results.KEGG <-PoTRA.corN(mydata=mydata,genelist=genelist,Num.sample.normal=113,Num.sample.case=113,Pathway.database=Pathway.database[1:15],PR.quantile=PR.quantile)
+```
+
+```{r results2, include=TRUE}
+names(results.KEGG)
+head(results.KEGG$Fishertest.p.value)
+head(results.KEGG$KStest.p.value) 
+head(results.KEGG$LengthOfPathway)
+head(results.KEGG$TheNumberOfHubGenes.normal)
+head(results.KEGG$TheNumberOfHubGenes.case)
+head(results.KEGG$TheNumberOfEdges.normal)
+head(results.KEGG$TheNumberOfEdges.case)
+head(results.KEGG$PathwayName)
+
+```
+
+
+
+<a name="Example 2"></a>
+<h4 style="color:SteelBlue;">Example 2: Using PoTRA with Reactome</h4>
+
+library(PoTRA) <br />
+library(repmis) <br />
+options(warn=-1) <br />
+library(BiocGenerics) <br />
+library(graph) <br />
+library(graphite) <br />
+library(igraph) <br />
+
+<b>Download the example dataset</b> <br />
+source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-vignette.RData") <br />
+
+<b>Choose your database before running the PoTRA commandline:</b>
+ 
+humanReactome <- pathways("hsapiens", "reactome") <br />
+Pathway.database = humanReactome <br />
+
+<b>Run the PoTRA program with Reactome:</b> <br />
+
+results.KEGG <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=113, Num.sample.case=113, Pathway.database=Pathway.database[1:15], PR.quantile=PR.quantile)
+
+
+```{r results3, include=FALSE}
+
+humanReactome<- pathways("hsapiens", "reactome") 
+Pathway.database = humanReactome 
+results.Reactome <-PoTRA.corN(mydata=mydata,genelist=genelist,Num.sample.normal=113,Num.sample.case=113,Pathway.database=Pathway.database[1:15],PR.quantile=PR.quantile)
+```
+
+```{r results4, include=TRUE}
+names(results.Reactome)
+head(results.Reactome$Fishertest.p.value)
+head(results.Reactome$KStest.p.value) 
+head(results.Reactome$LengthOfPathway)
+head(results.Reactome$TheNumberOfHubGenes.normal)
+head(results.Reactome$TheNumberOfHubGenes.case)
+head(results.Reactome$TheNumberOfEdges.normal)
+head(results.Reactome$TheNumberOfEdges.case)
+head(results.Reactome$PathwayName)
+
+```
+
+
+
+<a name="Example 3"></a>
+<h4 style="color:SteelBlue;">Example 2: Using PoTRA with Biocarta</h4>
+
+library(PoTRA) <br />
+library(repmis) <br />
+options(warn=-1) <br />
+library(BiocGenerics) <br />
+library(graph) <br />
+library(graphite) <br />
+library(igraph) <br />
+
+<b>Download the example dataset</b> <br />
+source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-vignette.RData") <br />
+
+<b>Choose your database before running the PoTRA commandline:</b> <br />
+
+humanBiocarta <- pathways("hsapiens", "biocarta") <br />
+Pathway.database = humanBiocarta <br />
+
+<b>Run the PoTRA program with Biocarta:</b>
+
+results.Biocarta <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=113, Num.sample.case=113, Pathway.database=Pathway.database[1:15], PR.quantile=PR.quantile)
+
+
+```{r results5, include=FALSE}
+
+humanBiocarta <- pathways("hsapiens", "biocarta")
+Pathway.database = humanBiocarta  
+results.Biocarta <-PoTRA.corN(mydata=mydata,genelist=genelist,Num.sample.normal=113,Num.sample.case=113,Pathway.database=Pathway.database[1:15],PR.quantile=PR.quantile)
+```
+
+```{r results6, include=TRUE}
+names(results.Biocarta)
+head(results.Biocarta$Fishertest.p.value)
+head(results.Biocarta$KStest.p.value) 
+head(results.Biocarta$LengthOfPathway)
+head(results.Biocarta$TheNumberOfHubGenes.normal)
+head(results.Biocarta$TheNumberOfHubGenes.case)
+head(results.Biocarta$TheNumberOfEdges.normal)
+head(results.Biocarta$TheNumberOfEdges.case)
+head(results.Biocarta$PathwayName)
+
+```
+
+<a name="Example 4"></a>
+<h4 style="color:SteelBlue;">Example 3: Using PoTRA with PharmGKB</h4>
+
+library(PoTRA) <br />
+library(repmis) <br />
+options(warn=-1) <br />
+library(BiocGenerics) <br />
+library(graph) <br />
+library(graphite) <br />
+library(igraph) <br />
+
+<b>Download the example dataset</b> <br />
+source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-vignette.RData") <br />
+
+<b>Choose your database before running the PoTRA commandline: </b>
+
+humanPharmGKB <- pathways("hsapiens", "pharmgkb") <br />
+Pathway.database = humanPharmGKB <br />
+
+<b>Run the PoTRA program with PharmGKB:</b> <br />
+
+results.PharmGKB <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=113, Num.sample.case=113, Pathway.database=Pathway.database[1:15], PR.quantile=PR.quantile)
+
+
+```{r results7, include=FALSE}
+
+humanPharmGKB <- pathways("hsapiens", "pharmgkb")
+Pathway.database = humanPharmGKB
+results.PharmGKB <-PoTRA.corN(mydata=mydata,genelist=genelist,Num.sample.normal=113,Num.sample.case=113,Pathway.database=Pathway.database[1:15],PR.quantile=PR.quantile)
+```
+
+```{r results8, include=TRUE}
+names(results.PharmGKB)
+head(results.PharmGKB$Fishertest.p.value)
+head(results.PharmGKB$KStest.p.value) 
+head(results.PharmGKB$LengthOfPathway)
+head(results.PharmGKB$TheNumberOfHubGenes.normal)
+head(results.PharmGKB$TheNumberOfHubGenes.case)
+head(results.PharmGKB$TheNumberOfEdges.normal)
+head(results.PharmGKB$TheNumberOfEdges.case)
+head(results.PharmGKB$PathwayName)
+
+```
+
+
+<a name="Ranking"></a>
+<h1><b>6       Ranking the Pathways</b></h1>
+ 
+Using the PharmGKB and the TCGA's BRCA open-access HTSEQ normalized gene expression data, sample files were joined on their genelists and then randomly sampled to form ten cohorts of normal and case samples. The pre-processed datasets were then analyzed by PoTRA and the results (Fisher Exact Test P-value and Pathway List) were separately sorted (FE p-values least to greatest), additionally, each set of sorted PoTRA results were given a rank column (1:nrow(DF)) and then a single dataframe was created to hold a single column of PharmGKB pathways, each results sorted FE P-values and all of the rank columns. <br />
+ 
+The FE P-values columns were statistically averaged using the sumlog(x) function from the metap package. Next, the Ranks were averaged using rowMeans from the colr library. <br />
+
+<h4 style="color:SteelBlue;">Exercise: Ranking the Pathways</h4>
+<b>Synthetic Data (Fisher's Exact Test P-values)</b>
+
+FPvalues1 <- c(0.01,0.05,1,0.90,0.01,0.05,0.03) <br />
+FPvalues2 <- c(0.01,1,1,1,0.94,0.34,0.25) <br />
+FPvalues3 <- c(0.01,0.01,0.04,0.07,0.01,0.03,0.40) <br />
+FPvalues4 <- c(0.55,0.21,0.01,0.02,0.01,0.01,0.01) <br />
+
+Note: In each results DF from PoTRA, sort the Fisher's Exact Test P-Values (decreasing = FALSE), so that the pathways for each individual results set,
+remains associated with their corresponding Fisher's Exact Test P-Values. <br />
+
+<b>PharmGKB Pathways associated with each of the FPvalues</b> <br />
+Pathways <- c("Statin Pathway - Generalized, Pharmacokinetics", "Atorvastatin/Lovastatin/Simvastatin Pathway", "Pharmacokinetics", "Pravastatin Pathway", "Pharmacokinetics", "Fluvastatin Pathway", "Pharmacokinetics") <br />
+
+ 
+<b>In the PoTRA results data frame, after sorting by Fisher's Exact Test P-Values, create a Rank column.</b> <br />
+
+Ranks <- seq(1,nrow(DF),1) <br />
+
+Repeat this for each set of PoTRA results. The following output is from the dataFrame of combined, sorted and ranked PoTRA results.
+
+```{r results9, include=FALSE}
+
+FPvalues1 <- c(0.01,0.05,1,0.90,0.01,0.05,0.03)
+FPvalues2 <- c(0.01,1,1,1,0.94,0.34,0.25)
+FPvalues3 <- c(0.01,0.01,0.04,0.07,0.01,0.03,0.40)
+FPvalues4 <- c(0.55,0.21,0.01,0.02,0.01,0.01,0.01)
+
+
+Pathways <- c("Statin Pathway - Generalized, Pharmacokinetics","Atorvastatin/Lovastatin/Simvastatin Pathway","Pharmacokinetics","Pravastatin Pathway","Pharmacokinetics","Fluvastatin Pathway", "Pharmacokinetics")
+
+
+DF <- data.frame(Pathways,FPvalues1,FPvalues2,FPvalues3,FPvalues4)
+DF$FPvalues1 <- sort(FPvalues1, decreasing=FALSE)
+DF$FPvalues2 <- sort(FPvalues2, decreasing=FALSE)
+DF$FPvalues3 <- sort(FPvalues3, decreasing=FALSE)
+DF$FPvalues4 <- sort(FPvalues4, decreasing=FALSE)
+
+DF$Rank1 <- c(1,1,2,3,3,4,5)
+DF$Rank2 <- c(1,2,3,4,5,5,5)
+DF$Rank3 <- c(1,1,1,2,3,4,5)
+DF$Rank4 <- c(1,1,1,1,2,3,4)
+ 
+
+
+```
+
+```{r results10, include=TRUE}
+DF
+```
+
+ 
+<h4 style="color:SteelBlue;">Averaging the Fisher's Exact P-values with SumLog</h4>
+
+
+library(metap) <br />
+library(colr) <br />
+
+FE = cgrep(DF, "^FPvalues") <br />
+data_FE <- as.data.frame(t(FE)) <br />
+
+FE_SumLog <- t(sapply(data_FE, function(z)  <br />
+      sumlog(z)$p <br />
+)) <br />
+ 
+FE_SumLogs <- data.frame(t(FE_SumLog)) <br />
+names(FE_SumLogs) <- c("SumLog_Pval") <br />
+
+
+
+```{r results11, include=FALSE}
+install.packages('metap', repos='http://cran.us.r-project.org')
+install.packages('colr', repos='http://cran.us.r-project.org')
+library(metap)
+library(colr)
+FE = cgrep(DF, "^FPvalues")
+
+data_FE <- as.data.frame(t(FE))
+
+FE_SumLog <- t(sapply(data_FE, function(z) 
+      sumlog(z)$p
+))
+
+FE_SumLogs <- data.frame(t(FE_SumLog))
+
+names(FE_SumLogs) <- c("SumLog_Pval")
+DF$FE_SumLogs <- FE_SumLogs
+```
+
+```{r results12, include=TRUE}
+FE_SumLogs
+ 
+```
+
+  
+<h4 style="color:SteelBlue;">Averaging the PharmGKB Pathway Ranks</h4>
+
+Ranks = cgrep(DF, "^Rank") <br />
+data_Ranks <- Ranks <br />
+DF$Average_Rank <- rowMeans(data_Ranks, na.rm = TRUE, dims = 1) <br />
+
+```{r results13, include=FALSE}
+
+Ranks = cgrep(DF, "^Rank")
+data_Ranks <- Ranks
+DF$Average_Rank <- rowMeans(data_Ranks, na.rm = TRUE, dims = 1)
+DF[2:9] <- NULL 
+ 
+```
+
+```{r results14, include=TRUE}
+DF
+ 
+```
+
+<a name="Session Info"></a>
+<h1><b>7        Session Info</b></h1>
+ 
+```{r results15, include=TRUE}
+sessionInfo()
+``` 
+
+
+<a name="References"></a>
+<h1><b>8        References</b></h1>
+ 
+
+1. Chaoxing Li, Li Liu and Valentin Dinu. “Pathways of Topological Rank Analysis (PoTRA): A Novel Method to Detect Pathways Involved in Cancer”, 2018.
+2. Linan MK, Dinu V. 2018. Dispersion analysis of PoTRA ranked mRNA mediated dysregulated pathways in Breast Invasive Cancer from a TCGA Pan-Cancer study. PeerJ Preprints 6:e27306v1 https://doi.org/10.7287/peerj.preprints.27306v1
+3. Ogata H, Goto S, Sato K, Fujibuchi W, Bono H, Kanehisa M. KEGG: Kyoto Encyclopedia of Genes and Genomes. Nucleic Acids Res. 1999 Jan 1;27(1):29-34.
+4. Reactome. What is Reactome? https://reactome.org/what-is-reactome

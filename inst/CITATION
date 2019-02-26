@@ -1,0 +1,14 @@
+citHeader("To cite the PoTRA package in publications use:")
+
+citEntry(entry="article",  
+  title  = "Pathways of topological rank analysis (PoTRA): a novel method to detect pathways involved in hepatocellular carcinoma.",
+  author = personList(person(given="Chaoxing", family="Li"),
+                      person(given="Li", family="Liu"),
+                      person(given="Valentine", family="Dinu")),
+  journal = "PeerJ",
+  year = "2018",
+  volume = "6",
+  pages = "1184--1191",
+  textVersion = paste("Pathways of topological rank analysis (PoTRA): a novel method to detect pathways involved in hepatocellular carcinoma.",
+                      "Li C, Liu L, Dinu V,",
+                      "PeerJ 6:e4571 (2018)."))

@@ -1,0 +1,28 @@
+#' PoTRA Package
+#'
+#' The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease. The PoTRA package contains one function for creating the PoTRA results object.
+#'
+#'
+#'results <- PoTRA.corN(mydata=mydata,
+#'                       genelist=genelist,
+#'                       Num.sample.normal=Num.sample.normal,
+#'                       Num.sample.case=Num.sample.case,
+#'                       Pathway.database=Pathway.database,
+#'                       PR.quantile=PR.quantile)
+#'
+#'Pathway.database (options):
+#'humanKEGG = pathways('hsapiens','kegg'),
+#'humanBiocarta = pathways('hsapiens', 'biocarta'),
+#'humanPharmGKB = pathways('hsapiens', 'pharmgkb').
+#'
+#'mydata is a dataframe that contains rownames consisting of entrez gene identifiers and columns representing normals and samples from gene expression data.
+#'The object genelist is a dataframe that consists of a single column of entrez gene identifiers (the same as those found in the rownames(mydata)).
+#'Other objects such as Num.sample.normal and Num.sample.case represent normals and cases in the mydata dataframe. The Pathway.database object contains gene
+#'lists from KEGG, Biocarta and PharmGKB databases, and these are made available through the graphite library.
+#'The PR.quantile object contains the percentile of PageRank scores as a cutoff for hub genes, the recommended percentile is 0.95.
+#' @docType package
+#' @author Chaoxing Li, Li Liu, Valentine Dinu \email{valentine.dinu@asu.edu}
+#'
+#' @name PoTRA
+#' @citation Li C, Liu L, Dinu V. 2018. Pathways of topological rank analysis (PoTRA): a novel method to detect pathways involved in hepatocellular carcinoma. PeerJ 6:e4571 https://doi.org/10.7717/peerj.4571
+NULL
