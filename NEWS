@@ -1,27 +1,3 @@
-Changes in version 0.99.7 (2018-02-23)
-+ Updated the news file 
-+ Updated the NAMESPACE and DESCRIPTION to include extra packages
-
-Changes in version 0.99.6 (2018-02-23)
-+ Updated the news file 
-+ Updated the vignette by including title in vignette engine code
-
-Changes in version 0.99.5 (2018-02-22)
-+ Updated the news file 
-+ Updated the vignette by adding cran mirrors for metap and colr
-
-Changes in version 0.99.4 (2018-02-22)
-+ Updated the news file 
-+ Updated the vignette by adding a cran mirror
-
-Changes in version 0.99.3 (2018-02-22)
-+ Updated the news file 
-+ Updated the vignette
-
-Changes in version 0.99.2 (2018-02-22)
-+ Updated the news file 
-+ Updated the vignette
-
 Changes in version 0.99.0 (2019-02-21)
 + Submitted to Bioconductor
  
