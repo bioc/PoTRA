@@ -1,7 +1,7 @@
 Package: PoTRA
 Type: Package
 Title: PoTRA: Pathways of Topological Rank Analysis
-Version: 0.99.0
+Version: 0.99.1
 Author: Chaoxing Li, Li Liu and Valentin Dinu
 Maintainer: Valentin Dinu <valentin.dinu@asu.edu>
 Description: PoTRA is a PageRank-based method that can be used to detect pathways involved in disease.
