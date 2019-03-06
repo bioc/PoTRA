@@ -12,6 +12,6 @@ Depends: R (>= 3.6.0), BiocGenerics, graph, igraph, org.Hs.eg.db
 Imports: org.Hs.eg.db, graphite, BiocGenerics, graph, igraph
 biocViews: ResearchField
 RoxygenNote: 6.1.1
-Suggests: BiocStyle, knitr, rmarkdown, colr, metap
+Suggests: BiocStyle, knitr, rmarkdown, colr, metap, repmis
 VignetteBuilder: knitr
  
