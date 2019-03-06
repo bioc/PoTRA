@@ -9,7 +9,7 @@ License: LGPL
 Encoding: UTF-8
 LazyData: false
 Depends: R (>= 3.6.0), stats, BiocGenerics
-Imports: org.Hs.eg.db, igraph, graph::pathwayGraph, graphite::convertIdentifiers, graphite::nodes
+Imports: org.Hs.eg.db, igraph, graph, graphite, graphite
 biocViews: StatisticalMethod, GeneExpression, DifferentialExpression, Pathways, Reactome, Network, KEGG, BioCarta
 RoxygenNote: 6.1.1
 Suggests: BiocStyle, knitr, rmarkdown, colr, metap, repmis
