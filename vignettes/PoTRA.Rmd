@@ -1,12 +1,12 @@
 ---
 title: <b><font color = "SteelBlue">Pathways of Topological Rank Analysis (PoTRA)</b></font>
-author: "Vignette Author: Margaret Linan, MS, MPH"
+author: "Chaoxing Li, Li Liu and Valentin Dinu"
 date: "February 7, 2019, Revised: February 22, 2019"
 output: 
     BiocStyle::html_document:
                     number_sections: true
 vignette: >
-    %\VignetteIndexEntry{Pathways of Topological Rank Analysis (PoTRA)}
+    %\VignetteIndexEntry{Vignette Title}
     %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding{UTF-8}  
 ---
@@ -35,7 +35,7 @@ vignette: >
 <a name="Abstract"></a> 
 <h1><b>1        Abstract</b></h1>  
 
-The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease (1). We use PageRank to measure the relative topological ranks ofgenes in each biological pathway, then select hub genes for each pathway, and use Fisher’s exact test to test if the number of hub genes in each pathway is altered from normal to cancer (1). Alternatively, if the distribution of topological ranks of gene in a pathway is altered between normal and cancer, this pathway might also be involved in cancer (1). Hence, we use the Kolmogorov–Smirnov test to detect pathways that have an altered distribution of topological ranks of genes between two phenotypes (1). PoTRA can be used with the KEGG, Biocarta, Reactome, NCI, SMPDB and PharmGKB databases from the devel graphite library.  
+The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease (1). We use PageRank to measure the relative topological ranks of genes in each biological pathway, then select hub genes for each pathway, and use Fishers Exact test to determine if the number of hub genes in each pathway is altered from normal to cancer (1). Alternatively, if the distribution of topological ranks of gene in a pathway is altered between normal and cancer, this pathway might also be involved in cancer (1). Hence, we use the Kolmogorov–Smirnov test to detect pathways that have an altered distribution of topological ranks of genes between two phenotypes (1). PoTRA can be used with the KEGG, Biocarta, Reactome, NCI, SMPDB and PharmGKB databases from the devel graphite library.  
 
 
 
@@ -45,11 +45,11 @@ The PoTRA analysis is based on topological ranks of genes in biological pathways
  
 <h5 style="color:SteelBlue;"><dt>Differential Network Analysis</dt></h5></a> 
 
-Most of the approaches for topology-based network and pathway analysis are based on different correlation-based metrics to identify differential networks between two different phenotypes. Generally, there are three main ways to compare networks for differential network analysis. The first approach handles weighted networks and uses some functions of the edge-specific weight differences as edge weights to construct differential networks (Hudson, Reverter & Dalrymple, 2009; Tesson, Breitling & Jansen, 2010; Liu et al., 2010; Rhinn et al., 2013). The second approach tries to find co-expressed gene sets and identify which correlation patterns are different between sets across conditions (Watson, 2006; Rahmatallah, Emmert-Streib & Glazko, 2014). This approach formulates summary measures that represent co-expression in a biological network and compares the metric between sets. The third approach compares the topology of biological networks across different phenotypes by using measures such as degree of nodes or modularity (Reverter et al., 2006; Zhang et al., 2009). However, the PoTRA method uses a topology-based metric to identify differential networks between two phenotypes. In addition to using different metrics, some of the other tools are based on correlation pattern of genes and identify groups of genes whose correlation patterns behave differentially across different datasets (Watson, 2006; Hudson, Reverter & Dalrymple, 2009; Tesson, Breitling & Jansen, 2010; Liu et al., 2010; Rhinn et al., 2013). Compared to these tools, PoTRA is directly based on topological ranks of genes and aims to identify pathways where the topological ranks of genes are different across datasets, which is more biologically intuitive. In this method, not only do we use correlation networks but we also use combined networks by taking intersected networks of correlation networks and KEGG curated pathways. Hence, when KEGG curated pathway information is employed, the topological rank-based PoTRA method can apply to the combined networks, while the previous correlation-based methods cannot, which is a limitation of the previously discussed correlation-only based methods. Regarding the previous tools based on topology (Reverter et al., 2006; Zhang et al., 2009), Zhang et al. focuses on identifying genes involved in topological changes, while PoTRA focuses on identifying pathways involved in topological changes. Also, Reverter et al. focuses on identifying genes with differential connectivity between two phenotypes, which is also different from PoTRA’s application scenario.
+Most of the approaches for topology-based network and pathway analysis are based on different correlation-based metrics to identify differential networks between two different phenotypes. Generally, there are three main ways to compare networks for differential network analysis. The first approach handles weighted networks and uses some functions of the edge-specific weight differences as edge weights to construct differential networks (Hudson, Reverter & Dalrymple, 2009; Tesson, Breitling & Jansen, 2010; Liu et al., 2010; Rhinn et al., 2013). The second approach tries to find co-expressed gene sets and identify which correlation patterns are different between sets across conditions (Watson, 2006; Rahmatallah, Emmert-Streib & Glazko, 2014). This approach formulates summary measures that represent co-expression in a biological network and compares the metric between sets. The third approach compares the topology of biological networks across different phenotypes by using measures such as degree of nodes or modularity (Reverter et al., 2006; Zhang et al., 2009). However, the PoTRA method uses a topology-based metric to identify differential networks between two phenotypes. In addition to using different metrics, some of the other tools are based on correlation pattern of genes and identify groups of genes whose correlation patterns behave differentially across different datasets (Watson, 2006; Hudson, Reverter & Dalrymple, 2009; Tesson, Breitling & Jansen, 2010; Liu et al., 2010; Rhinn et al., 2013). Compared to these tools, PoTRA is directly based on topological ranks of genes and aims to identify pathways where the topological ranks of genes are different across datasets, which is more biologically intuitive. In this method, not only do we use correlation networks but we also use combined networks by taking intersected networks of correlation networks and KEGG curated pathways. Hence, when KEGG curated pathway information is employed, the topological rank-based PoTRA method can apply to the combined networks, while the previous correlation-based methods cannot, which is a limitation of the previously discussed correlation-only based methods. Regarding the previous tools based on topology (Reverter et al., 2006; Zhang et al., 2009), Zhang et al. focuses on identifying genes involved in topological changes, while PoTRA focuses on identifying pathways involved in topological changes. Also, Reverter et al. focuses on identifying genes with differential connectivity between two phenotypes, which is also different from PoTRA's application scenario.
 
 <h5 style="color:SteelBlue;"><dt>Limitations</dt></h5></a> 
 
-Although the above methods for differential network analysis can deal with some important biological questions, they are still limited. In general, they are based on a basic hypothesis that some connections between genes across the groups could be thought of as “passenger” events and other connections are unique to either one of groups and thus could be “driver” events that contribute to disease progression and development. Hence, they focus on the contribution of individual differential connections to disease. This results in several limitations. First, each differential connection is regarded by these methods to have an equal contribution to disease. However, it is well understood that loss of a connection between two hub genes from normal to disease is more deleterious than loss of a connection between two non-hub genes. Second, how differential connections (“driver” connections mentioned above) between pairs of genes are associated with diseases is still not very biologically intuitive, because how the dependency between genes contributes to diseases is usually little understood.
+Although the above methods for differential network analysis can deal with some important biological questions, they are still limited. In general, they are based on a basic hypothesis that some connections between genes across the groups could be thought of as passenger events and other connections are unique to either one of groups and thus could be driver events that contribute to disease progression and development. Hence, they focus on the contribution of individual differential connections to disease. This results in several limitations. First, each differential connection is regarded by these methods to have an equal contribution to disease. However, it is well understood that loss of a connection between two hub genes from normal to disease is more deleterious than loss of a connection between two non-hub genes. Second, how differential connections (driver connections mentioned above) between pairs of genes are associated with diseases is still not very biologically intuitive, because how the dependency between genes contributes to diseases is usually little understood.
 
 <h5 style="color:SteelBlue;"><dt>The PoTRA Approach</dt></h5></a> 
 
@@ -88,7 +88,7 @@ BiocManager::install("PoTRA") <br />
    
 <h4 style="color:SteelBlue;">Values</h4>
 
-- Fishertest.p.value - The p-value of the Fisher’s exact test.   
+- Fishertest.p.value - The p-value of the Fisherâs exact test.   
 - KStest.p.value - The p-value of the K.S. test.    
 - LengthOfPathway - The length of pathways.    
 - TheNumberOfHubGenes.normal - The number of hub genes for normal samples.  
@@ -129,7 +129,6 @@ results.KEGG <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=1
 
 
 ```{r results1, include=FALSE}
-
 library(PoTRA)
 library(graphite)
 library(graph)
@@ -371,7 +370,6 @@ names(FE_SumLogs) <- c("SumLog_Pval") <br />
 
 
 ```{r results11, include=FALSE}
-
 library(metap)
 library(colr)
 FE = cgrep(DF, "^FPvalues")
@@ -426,7 +424,7 @@ sessionInfo()
 <h1><b>8        References</b></h1>
  
 
-1. Chaoxing Li, Li Liu and Valentin Dinu. “Pathways of Topological Rank Analysis (PoTRA): A Novel Method to Detect Pathways Involved in Cancer”, 2018.
+1. Chaoxing Li, Li Liu and Valentin Dinu. Pathways of Topological Rank Analysis (PoTRA): A Novel Method to Detect Pathways Involved in Cancer, 2018.
 2. Linan MK, Dinu V. 2018. Dispersion analysis of PoTRA ranked mRNA mediated dysregulated pathways in Breast Invasive Cancer from a TCGA Pan-Cancer study. PeerJ Preprints 6:e27306v1 https://doi.org/10.7287/peerj.preprints.27306v1
 3. Ogata H, Goto S, Sato K, Fujibuchi W, Bono H, Kanehisa M. KEGG: Kyoto Encyclopedia of Genes and Genomes. Nucleic Acids Res. 1999 Jan 1;27(1):29-34.
 4. Reactome. What is Reactome? https://reactome.org/what-is-reactome
