@@ -1,1 +1,1 @@
-import('org.Hs.eg.db', 'graphite', 'BiocGenerics', 'graph', 'igraph') 
+import('org.Hs.eg.db', 'graphite', 'BiocGenerics', 'graph', 'igraph', except=c(graph::edges, graph::degree, graph::intersection, graph::union, BiocGenerics::normalize, BiocGenerics::path)) 
