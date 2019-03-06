@@ -1,2 +1,2 @@
-import('org.Hs.eg.db', 'graphite', 'BiocGenerics', 'graph', 'igraph', except=c(graph::edges, graph::degree, graph::intersection, graph::union, BiocGenerics::normalize, BiocGenerics::path)) 
+import('org.Hs.eg.db', 'graphite', 'igraph')
 importFrom("stats", "cor.test", "fisher.test", "ks.test", "p.adjust", "quantile")
