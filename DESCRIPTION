@@ -10,7 +10,7 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.6.0), stats 
 Imports: org.Hs.eg.db, graphite, BiocGenerics, graph, igraph
-biocViews: StatisticalMethod, GeneExpression, DifferentialExpression, Pathways, Reactome, Network, KEGG, BioCarta, PharmGKB
+biocViews: StatisticalMethod, GeneExpression, DifferentialExpression, Pathways, Reactome, Network, KEGG, BioCarta
 RoxygenNote: 6.1.1
 Suggests: BiocStyle, knitr, rmarkdown, colr, metap, repmis
 VignetteBuilder: knitr
