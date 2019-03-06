@@ -5,7 +5,6 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
     require(graphite)
     require(igraph)  
     require(org.Hs.eg.db)
-    require(repmis)
     Fishertest<-c()
     TheNumOfHubGene.normal<-c()
     TheNumOfHubGene.case<-c()
@@ -18,10 +17,7 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
     #humanPharmGKB <- pathways("hsapiens", "pharmgkb")
     #humanBiocarta <- pathways("hsapiens", "biocarta")
     #humanKEGG <- pathways("hsapiens", "kegg")
-    
-
-    source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-devel.RData")
-    
+      
     
     for (x in 1:length(Pathway.database[1:length(Pathway.database)])){
         
