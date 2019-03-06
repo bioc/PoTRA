@@ -8,7 +8,7 @@ Description: The PoTRA analysis is based on topological ranks of genes in biolog
 License: LGPL
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.6.0), repmis, colr, metap
+Depends: R (>= 3.6.0) 
 Imports: org.Hs.eg.db, graphite, BiocGenerics, graph, igraph
 biocViews: StatisticalMethod
 RoxygenNote: 6.1.1
