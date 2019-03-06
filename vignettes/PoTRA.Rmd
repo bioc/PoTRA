@@ -129,7 +129,7 @@ results.KEGG <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=1
 
 
 ```{r results1, include=FALSE}
-install.packages('repmis', repos='http://cran.us.r-project.org')
+
 library(PoTRA)
 library(graphite)
 library(graph)
@@ -371,8 +371,7 @@ names(FE_SumLogs) <- c("SumLog_Pval") <br />
 
 
 ```{r results11, include=FALSE}
-install.packages('metap', repos='http://cran.us.r-project.org')
-install.packages('colr', repos='http://cran.us.r-project.org')
+
 library(metap)
 library(colr)
 FE = cgrep(DF, "^FPvalues")
