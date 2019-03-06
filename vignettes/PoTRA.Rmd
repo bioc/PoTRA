@@ -6,7 +6,7 @@ output:
     BiocStyle::html_document:
                     number_sections: true
 vignette: >
-    %\VignetteIndexEntry{Vignette Title}
+    %\VignetteIndexEntry{Pathways of Topological Rank Analysis (PoTRA)}
     %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding{UTF-8}  
 ---
