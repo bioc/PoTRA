@@ -1,6 +1,6 @@
 importFrom("stats", "cor.test", "fisher.test", "ks.test", "p.adjust", "quantile")
 importFrom("BiocGenerics")
 importFrom("graph")
-importFrom("graphite")
-importFrom("igraph")
+importFrom("graphite", "convertIdentifiers", "pathwayGraph", "nodes")
+importFrom("igraph", "igraph.from.graphNEL", "induced_subgraph", "graph.adjacency", "E", "page.rank")
 importFrom("org.Hs.eg.db")
