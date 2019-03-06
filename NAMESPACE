@@ -1,2 +1,2 @@
-import('org.Hs.eg.db', 'graphite', 'igraph')
+import('org.Hs.eg.db', 'igraph')
 importFrom("stats", "cor.test", "fisher.test", "ks.test", "p.adjust", "quantile")
