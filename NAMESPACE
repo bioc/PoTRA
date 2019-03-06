@@ -1,1 +1,1 @@
-importFrom("stats", "cor.test", "fisher.test", "ks.test", "p.adjust", "quantile")
+importFrom("graph", "BiocGenerics", "graphite", "igraph", "org.Hs.eg.db", "stats", "cor.test", "fisher.test", "ks.test", "p.adjust", "quantile")
