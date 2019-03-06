@@ -1,7 +1,7 @@
 ---
 title: <b><font color = "SteelBlue">Pathways of Topological Rank Analysis (PoTRA)</b></font>
 author: "Chaoxing Li, Li Liu and Valentin Dinu"
-date: "February 7, 2019, Revised: February 22, 2019"
+date: "February 7, 2019, Revised: March 6, 2019"
 output: 
     BiocStyle::html_document:
                     number_sections: true
