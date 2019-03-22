@@ -45,7 +45,7 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
 		
         #########################################################    
         #collect expression data of genes for a specific pathway# 
-		#across normal and tumor samples.                       #  
+	#across normal and tumor samples.                       #  
         #########################################################    
             path<-data.frame(matrix(0,
 				length.intersect,
@@ -62,9 +62,9 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
 				path[j,]<-mydata[which(genelist_reformatted==a[j]),]  
             }
             
-			################################################################
+	    ################################################################
             #Construct a gene-gene network for normal samples and calculate# 
-			#PageRank values for each gene in this network.				   #
+	    #PageRank values for each gene in this network.	           #
             ################################################################ 
             cor.normal <- apply(path[,seq_len(Num.sample.normal)],1, function(x) {
 					apply(path[,seq_len(Num.sample.normal)], 1, function(y) {
@@ -86,9 +86,9 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
             
             PR.normal<-page.rank(graph.normal,direct=FALSE)$vector
             
-			###############################################################
+	    ###############################################################
             #Construct a gene-gene network for tumor samples and calculate# 
-			#PageRank values for each gene in this network.				  #
+            #PageRank values for each gene in this network.		  #
             ###############################################################
 			range=(Num.sample.normal+1):(Num.sample.normal+Num.sample.case)
             cor.case <- apply(path[,range], 1, function(x) {
