@@ -57,8 +57,10 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
             
 				a[j]<-intersect(unlist(nodelist),unlist(genelist_reformatted))[j]  
 				
-				#collect expression data of genes for a specific pathway across normal and tumor samples.
-                
+		    		#################################################
+				#collect expression data of genes for a specific# 
+		    		#pathway across normal and tumor samples.       #
+                                #################################################
 				path[j,]<-mydata[which(genelist_reformatted==a[j]),]  
             }
             
