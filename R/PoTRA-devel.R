@@ -92,7 +92,7 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
             #Construct a gene-gene network for tumor samples and calculate# 
             #PageRank values for each gene in this network.		  #
             ###############################################################
-			range=(Num.sample.normal+1):(Num.sample.normal+Num.sample.case)
+	    range=(Num.sample.normal+1):(Num.sample.normal+Num.sample.case)
             cor.case <- apply(path[,range], 1, function(x) {
 				apply(path[,range], 1, function(y) {
 					cor.test(x,y)[[3]] 
@@ -119,7 +119,7 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
             
             matrix.HCC[,1]<-c(rep("Normal",length.intersect), rep("Cancer",length.intersect))
             
-			quant=quantile(PR.normal,PR.quantile)
+	    quant=quantile(PR.normal,PR.quantile)
 			
             loc.largePR<-which(as.numeric(rownames(matrix.HCC))>=quant)
             loc.smallPR<-which(as.numeric(rownames(matrix.HCC))<quant)
