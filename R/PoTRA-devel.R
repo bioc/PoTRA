@@ -36,11 +36,11 @@ for (x in seq_along(Pathway.database[seq_along(Pathway.database)])){
     if (length.intersect<5){
         next
         }
-	else{
+    else{
 		
         #########################################################    
         #collect expression data of genes for a specific pathway# 
-	#across normal and tumor samples.                       #  
+        #across normal and tumor samples.                       #  
         #########################################################    
             sum_samples = Num.sample.normal+Num.sample.case 
             path<-data.frame(matrix(0, length.intersect, sum_samples))
@@ -99,7 +99,7 @@ for (x in seq_along(Pathway.database[seq_along(Pathway.database)])){
 		cor.case_1
             })
             
-            cor.case<-as.matrix(cor.case) 
+	    cor.case<-as.matrix(cor.case) 
 		
 	    stat_adj_case = p.adjust(cor.case,method="fdr")
 	    cor.case.adj<-matrix(stat_adj_case,length.intersect,length.intersect)
