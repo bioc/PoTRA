@@ -10,11 +10,11 @@ The PoTRA analysis is based on topological ranks of genes in biological pathways
 }
 \details{
 results <- PoTRA.corN(mydata=mydata,
-                      genelist=genelist,
-                      Num.sample.normal=Num.sample.normal,
-                      Num.sample.case=Num.sample.case,
-                      Pathway.database=Pathway.database,
-                      PR.quantile=PR.quantile)
+    genelist=genelist,
+    Num.sample.normal=Num.sample.normal,
+    Num.sample.case=Num.sample.case,
+    Pathway.database=Pathway.database,
+    PR.quantile=PR.quantile)
 
 Pathway.database (options):
 humanKEGG = pathways('hsapiens','kegg'),
