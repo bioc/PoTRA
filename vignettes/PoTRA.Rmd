@@ -17,18 +17,18 @@ vignette: >
     <a href="#Abstract"><h5 style="color:SteelBlue;"><dt>Abstract</dt></h5></a>
     <a href="#Introduction"><h5 style="color:SteelBlue;"><dt>Introduction</dt></h5></a> 
     <a href="#Install_Guide"><h5 style="color:SteelBlue;"><dt>Installation</dt></h5></a>
-  <a href="#Parameters"><h5 style="color:SteelBlue;"><dt>Parameters</dt></h5></a> 
-  <a href="#Parameters"><h6 style="color:SteelBlue;"><dd>Arguements</dd></h6></a> 
-  <a href="#Parameters"><h6 style="color:SteelBlue;"><dd>Values</dd></h6></a> 
-  <a href="#Pathway Databases"><h5 style="SteelBlue;"><dt>Using Pathway Databases with PoTRA</dt></h5></a> 
-  <a href="#Example 1"><h6 style="color:SteelBlue;"><dd>Example 1: Detecting Dysregulated Pathways with Kegg</dd></h6></a> 
-  <a href="#Example 1"><h6 style="color:SteelBlue;"><dd>Example 2: Detecting Dysregulated Pathways with Reactome</dd></h6></a> 
-  <a href="#Example 2"><h6 style="color:SteelBlue;"><dd>Example 3: Detecting Dysregulated Pathways with Biocarta</dd></h6></a> 
-  <a href="#Example 3"><h6 style="color:SteelBlue;"><dd>Example 4: Detecting Dysregulated Pathways with PharmGKB</dd></h6></a> 
-  <a href="#Ranking"><h5 style="color:SteelBlue;"><dt>Ranking Pathways</dt></h5></a> 
-  <a href="#Session Info"><h5 style="color:SteelBlue;"><dt>Session Info</dt></h5></a> 
-  <a href="#References"><h5 style="color:SteelBlue;"><dt>References</dt></h5></a> 
-  </ol>
+    <a href="#Parameters"><h5 style="color:SteelBlue;"><dt>Parameters</dt></h5></a> 
+    <a href="#Parameters"><h6 style="color:SteelBlue;"><dd>Arguements</dd></h6></a> 
+    <a href="#Parameters"><h6 style="color:SteelBlue;"><dd>Values</dd></h6></a> 
+    <a href="#Pathway Databases"><h5 style="SteelBlue;"><dt>Using Pathway Databases with PoTRA</dt></h5></a> 
+    <a href="#Example 1"><h6 style="color:SteelBlue;"><dd>Example 1: Detecting Dysregulated Pathways with Kegg</dd></h6></a> 
+    <a href="#Example 1"><h6 style="color:SteelBlue;"><dd>Example 2: Detecting Dysregulated Pathways with Reactome</dd></h6></a> 
+    <a href="#Example 2"><h6 style="color:SteelBlue;"><dd>Example 3: Detecting Dysregulated Pathways with Biocarta</dd></h6></a> 
+    <a href="#Example 3"><h6 style="color:SteelBlue;"><dd>Example 4: Detecting Dysregulated Pathways with PharmGKB</dd></h6></a> 
+    <a href="#Ranking"><h5 style="color:SteelBlue;"><dt>Ranking Pathways</dt></h5></a> 
+    <a href="#Session Info"><h5 style="color:SteelBlue;"><dt>Session Info</dt></h5></a> 
+    <a href="#References"><h5 style="color:SteelBlue;"><dt>References</dt></h5></a> 
+    </ol>
 </div>
  
 
