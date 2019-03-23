@@ -14,4 +14,3 @@ biocViews: GraphAndNetwork, StatisticalMethod, GeneExpression, DifferentialExpre
 RoxygenNote: 6.1.1
 Suggests: BiocStyle, knitr, rmarkdown, colr, metap, repmis
 VignetteBuilder: knitr
- 
