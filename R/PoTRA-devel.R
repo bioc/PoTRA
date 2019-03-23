@@ -1,10 +1,5 @@
 PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway.database, PR.quantile) {
     
-    require(BiocGenerics)
-    require(graph)
-    require(graphite)
-    require(igraph)  
-    require(org.Hs.eg.db) 
     Fishertest<-c()
     TheNumOfHubGene.normal<-c()
     TheNumOfHubGene.case<-c()
