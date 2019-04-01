@@ -1,6 +1,16 @@
 ---
 title: <b><font color = "SteelBlue">Pathways of Topological Rank Analysis (PoTRA)</b></font>
-author: "Chaoxing Li, Li Liu and Valentin Dinu"
+author: 
+- name: "Chaoxing Li"
+  affiliation: 
+  - "Arizona State University, Tempe, AZ"
+- name: "Li Liu"
+  affiliation: "College of Health Solutions, Arizona State University, Tempe, AZ"
+- name: "Valentin Dinu"
+  affiliation: "College of Health Solutions. Arizona State University, Tempe, AZ"
+  email: "valentin.dinu@asu.edu"
+- name: "Margaret Linan"
+  affiliation: "Icahn School of Medicine at Mount Sinai, New York, NY"
 date: "February 7, 2019, Revised: March 6, 2019"
 output: 
     BiocStyle::html_document:
