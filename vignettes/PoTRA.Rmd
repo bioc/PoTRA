@@ -7,7 +7,7 @@ author:
 - name: "Li Liu"
   affiliation: "College of Health Solutions, Arizona State University, Tempe, AZ"
 - name: "Valentin Dinu"
-  affiliation: "College of Health Solutions. Arizona State University, Tempe, AZ"
+  affiliation: "College of Health Solutions, Arizona State University, Tempe, AZ"
   email: "valentin.dinu@asu.edu"
 - name: "Margaret Linan"
   affiliation: "Icahn School of Medicine at Mount Sinai, New York, NY"
