@@ -18,13 +18,14 @@ results <- PoTRA.corN(mydata=mydata,
 
 Pathway.database (options):
 humanKEGG = pathways('hsapiens','kegg'),
+humanReactome = pathways('hsapiens','reactome'),
 humanBiocarta = pathways('hsapiens', 'biocarta'),
 humanPharmGKB = pathways('hsapiens', 'pharmgkb').
 
 mydata is a dataframe that contains rownames consisting of entrez gene identifiers and columns representing normals and samples from gene expression data.
 The object genelist is a dataframe that consists of a single column of entrez gene identifiers (the same as those found in the rownames(mydata)).
 Other objects such as Num.sample.normal and Num.sample.case represent normals and cases in the mydata dataframe. The Pathway.database object contains gene
-lists from KEGG, Biocarta and PharmGKB databases, and these are made available through the graphite library.
+lists from KEGG, Reactome, Biocarta and PharmGKB databases, and these are made available through the graphite library.
 The PR.quantile object contains the percentile of PageRank scores as a cutoff for hub genes, the recommended percentile is 0.95.
 }
 \author{
