@@ -143,6 +143,7 @@ library(PoTRA)
 library(graphite)
 library(graph)
 library(igraph)
+devtools::install_github('christophergandrud/repmis')
 library(repmis)
 source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-vignette.RData")
 
