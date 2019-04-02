@@ -1,3 +1,5 @@
+Changes in version 0.99.71 (2019-04-02)
++ Added devtools install script for repmis in vignette
 Changes in version 0.99.70 (2019-04-01)
 + Accepted to Bioconductor 
 Changes in version 0.99.0 (2019-02-21)
