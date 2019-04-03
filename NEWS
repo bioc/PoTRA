@@ -1,3 +1,7 @@
+Changes in version 0.99.73 (2019-04-03)
++ Improved the code in the vignette and edited the manual
+Changes in version 0.99.72 (2019-04-02)
++ Updated the landing page abstract
 Changes in version 0.99.71 (2019-04-02)
 + Added devtools install script for repmis in vignette
 Changes in version 0.99.70 (2019-04-01)
