@@ -58,10 +58,9 @@ The TCGA BRCA open access HTSEQ normalized gene expression data was used with Po
 <b>Installation from Bioconductor (recommended)</b> <br />
 The most reliable way to install the package is to use the following Bioconductor method: <br />
 
-Try http:// if https:// URLs are not supported <br />
-if (!requireNamespace("BiocManager", quietly=TRUE)) <br />
+if (!requireNamespace("BiocManager", quietly = TRUE)) <br />
     install.packages("BiocManager") <br />
-BiocManager::install("PoTRA") <br />
+BiocManager::install("PoTRA", version = "3.9") </br>
 
 <a name="Parameters"></a> 
 <h1><b>4        Parameters</b></h1>  
