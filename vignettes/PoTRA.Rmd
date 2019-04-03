@@ -22,7 +22,6 @@ vignette: >
 ---
 
 <div style="background-color:white">
-  
  <body>
     <h1><b>Table of Contents</b></h1>
     <ol>
@@ -41,7 +40,7 @@ vignette: >
     <a href="#Session Info"><h5 style="color:SteelBlue;"><dt>Session Info</dt></h5></a> 
     <a href="#References"><h5 style="color:SteelBlue;"><dt>References</dt></h5></a> 
     </ol>
-</body>
+ </body>
 </div>
  
 
