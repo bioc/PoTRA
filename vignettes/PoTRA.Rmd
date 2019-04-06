@@ -72,14 +72,14 @@ BiocManager::install("PoTRA", version = "3.9") </br>
 - genelist - A list of gene names (entrez).  
 - Number.sample.normal - The number of normal samples.  
 - Number.sample.case - The number of case samples.
-- Pathway.database - The pathway database used in the study, such as, KEGG, Biocarta and PharmGKB. 
+- Pathway.database - The pathway database, such as KEGG, Reactome, Biocarta and PharmGKB. 
 - PR.quantile - The percentile of PageRank scores as a cutoff for hub genes. A value of 0.95 is recommended.
 
 
    
 <h4 style="color:SteelBlue;">Values</h4>
 
-- Fishertest.p.value - The p-value of the Fisherâs exact test.   
+- Fishertest.p.value - The p-value of the Fisher's exact test.   
 - KStest.p.value - The p-value of the K.S. test.    
 - LengthOfPathway - The length of pathways.    
 - TheNumberOfHubGenes.normal - The number of hub genes for normal samples.  
