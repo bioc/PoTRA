@@ -26,8 +26,8 @@
 #' \describe{
 #'  \item{KEGG}{humanKEGG = pathways('hsapiens','kegg')}
 #'  \item{Reactome}{humanReactome = pathways('hsapiens','reactome')}
-#'  \item{Biocarta}{humanBiocarta = pathways('hsapiens', 'biocarta')}
-#'  \item{PharmGKB}{humanPharmGKB = pathways('hsapiens', 'pharmgkb')}
+#'  \item{Biocarta}{humanBiocarta = pathways('hsapiens','biocarta')}
+#'  \item{PharmGKB}{humanPharmGKB = pathways('hsapiens','pharmgkb')}
 #' }
 #' @docType package
 #' @author Chaoxing Li, Li Liu, Valentine Dinu \email{valentine.dinu@asu.edu}
