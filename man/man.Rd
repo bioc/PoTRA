@@ -9,6 +9,8 @@
 The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease. The PoTRA package contains one function for creating the PoTRA results object.
 }
 \details{
+ 
+Results <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=Num.sample.normal, Num.sample.case=Num.sample.case, Pathway.database=Pathway.database, PR.quantile=PR.quantile)
 \subsection{Object Definitions for PoTRA.corN}
  \describe{ 
   \item{mydata}{Dataframe that contains rownames consisting of entrez gene identifiers and columns representing normals and samples from gene expression data.}
