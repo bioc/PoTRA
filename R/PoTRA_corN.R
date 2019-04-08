@@ -1,6 +1,21 @@
-#' @export
+#' PoTRA
 #'
-
+#' Creates a list object that contains the results of the PoTRA.corN function.
+#'
+#' @param mydata A gene expression dataset (dataframe). Rows represent genes, and columns represent samples (from control to case). A minimum of 50 controls and 50 cases is recommended. Row names must represent gene identifiers (entrez). A minimum of 18,000 genes are recommended.
+#' @param genelist A list of gene names (entrez).
+#' @param Num.sample.normal The number of normal samples. 
+#' @param Num.sample.case The number of case samples.
+#' @param Pathway.database The pathway database, such as KEGG, Reactome, Biocarta and PharmGKB. 
+#' @param PR.quantile The percentile of PageRank scores as a cutoff for hub genes. A value of 0.95 is recommended.
+#'
+#' 
+#' @return None
+#'
+#' @examples
+#' PoTRA.corN()
+#'
+#' @export
 PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway.database, PR.quantile) {
     
 Fishertest<-c()
@@ -12,9 +27,6 @@ length.pathway<-c()
 kstest<-c()
 pathwaynames <- c()
 
-#humanPharmGKB <- pathways("hsapiens", "pharmgkb")
-#humanBiocarta <- pathways("hsapiens", "biocarta")
-#humanKEGG <- pathways("hsapiens", "kegg")
 
 for (x in seq_along(Pathway.database[seq_along(Pathway.database)])){       
 
