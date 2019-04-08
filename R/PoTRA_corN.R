@@ -1,19 +1,28 @@
-#' PoTRA
+#' The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease. The PoTRA package contains one function for creating the PoTRA results object.
 #'
-#' Creates a list object that contains the results of the PoTRA.corN function.
-#'
-#' @param mydata A gene expression dataset (dataframe). Rows represent genes, and columns represent samples (from control to case). A minimum of 50 controls and 50 cases is recommended. Row names must represent gene identifiers (entrez). A minimum of 18,000 genes are recommended.
-#' @param genelist A list of gene names (entrez).
-#' @param Num.sample.normal The number of normal samples. 
-#' @param Num.sample.case The number of case samples.
+#' @param mydata Dataframe that contains rownames consisting of entrez gene identifiers and columns representing normals and samples from gene expression data Row names must represent gene identifiers (entrez). A minimum of 18,000 genes are recommended.
+#' @param genelist The object genelist is a dataframe that consists of a single column of entrez gene identifiers (the same as those found in the rownames(mydata)).
+#' @param Num.sample.normal The number of normal samples in the mydata dataframe. 
+#' @param Num.sample.case The number of case samples in the mydata dataframe.
 #' @param Pathway.database The pathway database, such as KEGG, Reactome, Biocarta and PharmGKB. 
-#' @param PR.quantile The percentile of PageRank scores as a cutoff for hub genes. A value of 0.95 is recommended.
+#' @param PR.quantile Contains the percentile of PageRank scores as a cutoff for hub genes, the recommended percentile is 0.95.
 #'
 #' 
 #' @return None
 #'
 #' @examples
-#' PoTRA.corN()
+#' Results <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=Num.sample.normal, Num.sample.case=Num.sample.case, Pathway.database=Pathway.database, PR.quantile=PR.quantile)
+#'
+#' Pathway.database (options): 
+#' humanKEGG=pathways(’hsapiens’,’kegg’)
+#' humanReactome=pathways(’hsapiens’,’reactome’)
+#' humanBiocarta=pathways(’hsapiens’, ’biocarta’)
+#' humanPharmGKB=pathways(’hsapiens’, ’pharmgkb’)
+#'
+#' Pathway.database=humanKEGG
+#' Pathway.database=humanReactome
+#' Pathway.database=humanBiocarta
+#' Pathway.database=humanPharmGKB
 #'
 #' @export
 PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway.database, PR.quantile) {
