@@ -1,3 +1,6 @@
+#' @export
+#'
+
 PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway.database, PR.quantile) {
     
 Fishertest<-c()
