@@ -1,3 +1,4 @@
+export("PoTRA.corN")
 importFrom("stats", "cor.test", "fisher.test", "ks.test", "p.adjust", "quantile")
 importFrom("BiocGenerics")
 importFrom("graph")
