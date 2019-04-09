@@ -14,10 +14,10 @@
 #' Results <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=Num.sample.normal, Num.sample.case=Num.sample.case, Pathway.database=Pathway.database, PR.quantile=PR.quantile)
 #'
 #' Pathway.database (options): 
-#' humanKEGG=pathways(’hsapiens’,’kegg’)
-#' humanReactome=pathways(’hsapiens’,’reactome’)
-#' humanBiocarta=pathways(’hsapiens’, ’biocarta’)
-#' humanPharmGKB=pathways(’hsapiens’, ’pharmgkb’)
+#' humanKEGG=pathways('hsapiens','kegg')
+#' humanReactome=pathways('hsapiens','reactome')
+#' humanBiocarta=pathways('hsapiens','biocarta')
+#' humanPharmGKB=pathways('hsapiens','pharmgkb')
 #'
 #' Pathway.database=humanKEGG
 #' Pathway.database=humanReactome
