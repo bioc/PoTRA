@@ -7,7 +7,7 @@
 \title{PoTRA.corN}
 \description{The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease. The PoTRA package contains one function for creating the PoTRA results object.}
 
-\usage{PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=Num.sample.normal, Num.sample.case=Num.sample.case, Pathway.database=Pathway.database, PR.quantile=PR.quantile)}
+\usage{PoTRA.corN(mydata, genelist, Num.sample.normal, Num.sample.case, Pathway.database, PR.quantile)}
 
 \arguments{
   \item{mydata}{Dataframe that contains rownames consisting of entrez gene identifiers and columns representing normals and samples from gene expression data.}
