@@ -10,7 +10,7 @@
 
 \usage{Results <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=Num.sample.normal, Num.sample.case=Num.sample.case, Pathway.database=Pathway.database, PR.quantile=PR.quantile)}
 
-\arguements{
+\arguments{
   \item{mydata}{Dataframe that contains rownames consisting of entrez gene identifiers and columns representing normals and samples from gene expression data.}
   \item{genelist}{Dataframe that consists of a single column of entrez gene identifiers (the same as those found in the rownames(mydata)).}
   \item{Num.sample.normal}{Represents normal samples in the mydata dataframe.}
