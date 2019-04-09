@@ -2,7 +2,6 @@
 % Please edit documentation in R/potra_man.R
 \docType{package}
 \name{PoTRA}
-\alias{PoTRA}
 \alias{PoTRA.corN}
 \alias{PoTRA-package}
 \title{PoTRA Package}
