@@ -3,7 +3,6 @@
 \docType{package}
 \name{PoTRA}
 \alias{PoTRA.corN}
-\alias{PoTRA-package}
 \title{PoTRA.corN}
 \description{The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease. The PoTRA package contains one function for creating the PoTRA results object.}
 
