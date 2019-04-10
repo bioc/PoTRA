@@ -18,14 +18,15 @@
   \item{PR.quantile}{Object contains the percentile of PageRank scores as a cutoff for hub genes, the recommended percentile is 0.95.}
 }
 
-\details{ 
+\examples{ 
 
-Pathway.database = humanKEGG, etc (see below for additional database definitions.)
+# Define the Pathway.database variable using the KEGG, Reactome, Biocarta and PharmGKB databases.
+Pathway.database = humanKEGG
 
-  \item{KEGG}{humanKEGG = pathways('hsapiens','kegg')}
-  \item{Reactome}{humanReactome = pathways('hsapiens','reactome')}
-  \item{Biocarta}{humanBiocarta = pathways('hsapiens','biocarta')}
-  \item{PharmGKB}{humanPharmGKB = pathways('hsapiens','pharmgkb')}
+humanKEGG = pathways('hsapiens','kegg')
+humanReactome = pathways('hsapiens','reactome')
+humanBiocarta = pathways('hsapiens','biocarta')
+humanPharmGKB = pathways('hsapiens','pharmgkb')
 }  
 
 \author{
