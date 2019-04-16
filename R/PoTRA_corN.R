@@ -96,7 +96,7 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
             graph.normal<-graph.adjacency(cor.normal.adj,weighted=TRUE,mode="undirected")
             E.normal[x]<-length(E(graph.normal))
             
-            PR.normal<-page.rank(graph.normal,direct=FALSE)$vector
+            PR.normal<-page.rank(graph.normal,directed=FALSE)$vector
             
             ##Construct a gene-gene network for tumor samples and calculate PageRank values for each gene in this network.
             
@@ -111,7 +111,7 @@ PoTRA.corN <- function(mydata,genelist,Num.sample.normal,Num.sample.case,Pathway
             graph.case<-graph.adjacency(cor.case.adj,weighted=TRUE,mode="undirected")
             E.case[x]<-length(E(graph.case))
             
-            PR.case<-page.rank(graph.case,direct=FALSE)$vector
+            PR.case<-page.rank(graph.case,directed=FALSE)$vector
             
             
             matrix.HCC<- matrix("NA",2*length.intersect,2)
