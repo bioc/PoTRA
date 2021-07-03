@@ -13,7 +13,7 @@
   \item{genelist}{Dataframe that consists of a single column of entrez gene identifiers (the same as those found in the rownames(mydata)).}
   \item{Num.sample.normal}{Represents normal samples in the mydata dataframe.}
   \item{Num.sample.case}{Represents case samples in the mydata dataframe.}
-  \item{Pathway.database}{Object contains gene lists from KEGG, Reactome, Biocarta and PharmGKB databases, and these are made available through the devel graphite library.}
+  \item{Pathway.database}{Object contains gene lists from KEGG, Reactome, PathBank, Panther and PharmGKB databases, and these are made available through the devel graphite library.}
   \item{PR.quantile}{Object contains the percentile of PageRank scores as a cutoff for hub genes, the recommended percentile is 0.95.}
 }
 
