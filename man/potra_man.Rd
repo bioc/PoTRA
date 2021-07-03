@@ -18,5 +18,5 @@
 }
 
 \author{
-Chaoxing Li, Li Liu, Valentine Dinu \email{valentine.dinu@asu.edu}
+Chaoxing Li, Li Liu, Valentin Dinu \email{valentin.dinu@asu.edu}
 }
