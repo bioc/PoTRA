@@ -27,7 +27,7 @@ vignette: >
 <a name="Abstract"></a> 
 <h1><b>1        Abstract</b></h1>  
 
-The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease (1). We use PageRank to measure the relative topological ranks of genes in each biological pathway, then select hub genes for each pathway, and use Fishers Exact test to determine if the number of hub genes in each pathway is altered from normal to cancer (1). Alternatively, if the distribution of topological ranks of gene in a pathway is altered between normal and cancer, this pathway might also be involved in cancer (1). Hence, we use the Kolmogorov–Smirnov test to detect pathways that have an altered distribution of topological ranks of genes between two phenotypes (1). PoTRA can be used with the KEGG, Biocarta, Reactome, NCI, SMPDB and PharmGKB databases from the devel graphite library.  
+The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease (1). We use PageRank to measure the relative topological ranks of genes in each biological pathway, then select hub genes for each pathway, and use Fishers Exact test to determine if the number of hub genes in each pathway is altered from normal to cancer (1). Alternatively, if the distribution of topological ranks of gene in a pathway is altered between normal and cancer, this pathway might also be involved in cancer (1). Hence, we use the Kolmogorov–Smirnov test to detect pathways that have an altered distribution of topological ranks of genes between two phenotypes (1). PoTRA can be used with the KEGG, Biocarta, Reactome, SMPDB, Panther, PathBank and PharmGKB databases from the devel graphite library.  
 
 
 
@@ -196,7 +196,7 @@ head(results.Reactome$PathwayName)
 
 
 <a name="Example 3"></a>
-<h4 style="color:SteelBlue;">Example 2: Using PoTRA with Biocarta</h4>
+<h4 style="color:SteelBlue;">Example 2: Using PoTRA with PathBank</h4>
 
 library(PoTRA) <br />
 library(repmis) <br />
@@ -211,31 +211,31 @@ source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-v
 
 <b>Choose your database before running the PoTRA commandline:</b> <br />
 
-humanBiocarta <- pathways("hsapiens", "biocarta") <br />
-Pathway.database = humanBiocarta <br />
+humanBiocarta <- pathways("hsapiens", "pathbank") <br />
+Pathway.database = humanPathBank <br />
 
-<b>Run the PoTRA program with Biocarta:</b>
+<b>Run the PoTRA program with PathBank:</b>
 
-results.Biocarta <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=113, Num.sample.case=113, Pathway.database=Pathway.database[1:15], PR.quantile=PR.quantile)
+results.PathBank <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=113, Num.sample.case=113, Pathway.database=Pathway.database[1:15], PR.quantile=PR.quantile)
 
 
 ```{r results5, include=FALSE}
 
-humanBiocarta <- pathways("hsapiens", "biocarta")
-Pathway.database = humanBiocarta  
-results.Biocarta <-PoTRA.corN(mydata=mydata,genelist=genelist,Num.sample.normal=113,Num.sample.case=113,Pathway.database=Pathway.database[1:15],PR.quantile=PR.quantile)
+humanBiocarta <- pathways("hsapiens", "pathbank")
+Pathway.database = humanPathBank  
+results.PathBank <-PoTRA.corN(mydata=mydata,genelist=genelist,Num.sample.normal=113,Num.sample.case=113,Pathway.database=Pathway.database[1:15],PR.quantile=PR.quantile)
 ```
 
 ```{r results6, include=TRUE}
-names(results.Biocarta)
-head(results.Biocarta$Fishertest.p.value)
-head(results.Biocarta$KStest.p.value) 
-head(results.Biocarta$LengthOfPathway)
-head(results.Biocarta$TheNumberOfHubGenes.normal)
-head(results.Biocarta$TheNumberOfHubGenes.case)
-head(results.Biocarta$TheNumberOfEdges.normal)
-head(results.Biocarta$TheNumberOfEdges.case)
-head(results.Biocarta$PathwayName)
+names(results.PathBank)
+head(results.PathBank$Fishertest.p.value)
+head(results.PathBank$KStest.p.value) 
+head(results.PathBank$LengthOfPathway)
+head(results.PathBank$TheNumberOfHubGenes.normal)
+head(results.PathBank$TheNumberOfHubGenes.case)
+head(results.PathBank$TheNumberOfEdges.normal)
+head(results.PathBank$TheNumberOfEdges.case)
+head(results.PathBank$PathwayName)
 
 ```
 
