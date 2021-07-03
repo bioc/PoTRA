@@ -10,8 +10,8 @@ author:
   affiliation: *id
   email: "valentin.dinu@asu.edu"
 - name: "Margaret Linan"
-  affiliation: "Icahn School of Medicine at Mount Sinai, New York, NY"
-date: "February 7, 2019, Revised: April 6, 2019"
+  affiliation: "College of Health Solutions, Arizona State University, Tempe, AZ"
+date: "February 7, 2019, Revised: July 3, 2021"
 output: 
     BiocStyle::html_document:
                     toc: true
@@ -124,7 +124,7 @@ library(PoTRA)
 library(graphite)
 library(graph)
 library(igraph)
-devtools::install_github('christophergandrud/repmis')
+#devtools::install_github('christophergandrud/repmis')
 library(repmis)
 source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-vignette.RData")
 
