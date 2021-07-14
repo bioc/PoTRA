@@ -10,8 +10,8 @@ author:
   affiliation: *id
   email: "valentin.dinu@asu.edu"
 - name: "Margaret Linan"
-  affiliation: "Icahn School of Medicine at Mount Sinai, New York, NY"
-date: "February 7, 2019, Revised: April 6, 2019"
+  affiliation: "College of Health Solutions, Arizona State University, Tempe, AZ"
+date: "February 7, 2019, Revised: July 3, 2021"
 output: 
     BiocStyle::html_document:
                     toc: true
@@ -27,7 +27,7 @@ vignette: >
 <a name="Abstract"></a> 
 <h1><b>1        Abstract</b></h1>  
 
-The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease (1). We use PageRank to measure the relative topological ranks of genes in each biological pathway, then select hub genes for each pathway, and use Fishers Exact test to determine if the number of hub genes in each pathway is altered from normal to cancer (1). Alternatively, if the distribution of topological ranks of gene in a pathway is altered between normal and cancer, this pathway might also be involved in cancer (1). Hence, we use the Kolmogorov–Smirnov test to detect pathways that have an altered distribution of topological ranks of genes between two phenotypes (1). PoTRA can be used with the KEGG, Biocarta, Reactome, NCI, SMPDB and PharmGKB databases from the devel graphite library.  
+The PoTRA analysis is based on topological ranks of genes in biological pathways. PoTRA can be used to detect pathways involved in disease (1). We use PageRank to measure the relative topological ranks of genes in each biological pathway, then select hub genes for each pathway, and use Fishers Exact test to determine if the number of hub genes in each pathway is altered from normal to cancer (1). Alternatively, if the distribution of topological ranks of gene in a pathway is altered between normal and cancer, this pathway might also be involved in cancer (1). Hence, we use the Kolmogorov–Smirnov test to detect pathways that have an altered distribution of topological ranks of genes between two phenotypes (1). PoTRA can be used with the KEGG, Reactome, SMPDB, Panther, PathBank and PharmGKB databases from the devel graphite library.  
 
 
 
@@ -72,7 +72,7 @@ BiocManager::install("PoTRA", version = "3.9") </br>
 - genelist - A list of gene names (entrez).  
 - Number.sample.normal - The number of normal samples.  
 - Number.sample.case - The number of case samples.
-- Pathway.database - The pathway database, such as KEGG, Reactome, Biocarta and PharmGKB. 
+- Pathway.database - The pathway database, such as KEGG, Reactome, PathBank and PharmGKB. 
 - PR.quantile - The percentile of PageRank scores as a cutoff for hub genes. A value of 0.95 is recommended.
 
 
@@ -86,12 +86,12 @@ BiocManager::install("PoTRA", version = "3.9") </br>
 - TheNumberOfHubGenes.case - The number of hub genes for cancer samples.    
 - TheNumberOfEdges.normal - The number of edges in the network for normal samples.    
 - TheNumberOfEdges.case - The number of edges in the network for cancer samples.    
-- Pathways - The list of pathways provided by the specified database (KEGG, Reactome, Biocarta, PharmGKB)
+- Pathways - The list of pathways provided by the specified database (KEGG, Reactome, PathBank, PharmGKB)
 
 <a name="Pathway Databases"></a>
 <h1><b>5       Using Pathway Databases with PoTRA</b></h1>
 
-The following examples utilize the KEGG, Reactome, BioCarta and PharmGKB databases. Kanehisa Laboratories developed KEGG and has been updating it since 1995, it is an important resource for signaling and metabolic pathways (3). The BioCarta biotech company supports the BioCarta community forum, also known as the Biocarta database. The scientific community contributes to the forum and constantly updates it with new proteomic information. Reactome is one of the most comprehensive databases for signaling and metabolic molecules and describes how they relate to pathways and processes (4). PharmGKB is a well known comprehensive resource and describes how genetic variants impact drug response. The PharmGKB database primarily serves as a important resource for metabolic data analyses.
+The following examples utilize the KEGG, Reactome, PathBank and PharmGKB databases. Kanehisa Laboratories developed KEGG and has been updating it since 1995, it is an important resource for signaling and metabolic pathways (3). The PathBank pathway database reports pathways for every protein and a map for every metabolite and is supported by Dr. Wishart (Univ. Alberta and The Metabolomics Innovation Centre). Reactome is one of the most comprehensive databases for signaling and metabolic molecules and describes how they relate to pathways and processes (4). PharmGKB is a well known comprehensive resource and describes how genetic variants impact drug response. The PharmGKB database primarily serves as a important resource for metabolic data analyses.
 
 
 <a name="Example 1"></a>
@@ -124,7 +124,7 @@ library(PoTRA)
 library(graphite)
 library(graph)
 library(igraph)
-devtools::install_github('christophergandrud/repmis')
+#devtools::install_github('christophergandrud/repmis')
 library(repmis)
 source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-vignette.RData")
 
@@ -196,7 +196,7 @@ head(results.Reactome$PathwayName)
 
 
 <a name="Example 3"></a>
-<h4 style="color:SteelBlue;">Example 2: Using PoTRA with Biocarta</h4>
+<h4 style="color:SteelBlue;">Example 2: Using PoTRA with PathBank</h4>
 
 library(PoTRA) <br />
 library(repmis) <br />
@@ -211,31 +211,31 @@ source_data("https://github.com/GenomicsPrograms/example_data/raw/master/PoTRA-v
 
 <b>Choose your database before running the PoTRA commandline:</b> <br />
 
-humanBiocarta <- pathways("hsapiens", "biocarta") <br />
-Pathway.database = humanBiocarta <br />
+humanPathBank <- pathways("hsapiens", "pathbank") <br />
+Pathway.database = humanPathBank <br />
 
-<b>Run the PoTRA program with Biocarta:</b>
+<b>Run the PoTRA program with PathBank:</b>
 
-results.Biocarta <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=113, Num.sample.case=113, Pathway.database=Pathway.database[1:15], PR.quantile=PR.quantile)
+results.PathBank <- PoTRA.corN(mydata=mydata, genelist=genelist, Num.sample.normal=113, Num.sample.case=113, Pathway.database=Pathway.database[1:15], PR.quantile=PR.quantile)
 
 
 ```{r results5, include=FALSE}
 
-humanBiocarta <- pathways("hsapiens", "biocarta")
-Pathway.database = humanBiocarta  
-results.Biocarta <-PoTRA.corN(mydata=mydata,genelist=genelist,Num.sample.normal=113,Num.sample.case=113,Pathway.database=Pathway.database[1:15],PR.quantile=PR.quantile)
+humanPathBank <- pathways("hsapiens", "pathbank")
+Pathway.database = humanPathBank  
+results.PathBank <-PoTRA.corN(mydata=mydata,genelist=genelist,Num.sample.normal=113,Num.sample.case=113,Pathway.database=Pathway.database[1:15],PR.quantile=PR.quantile)
 ```
 
 ```{r results6, include=TRUE}
-names(results.Biocarta)
-head(results.Biocarta$Fishertest.p.value)
-head(results.Biocarta$KStest.p.value) 
-head(results.Biocarta$LengthOfPathway)
-head(results.Biocarta$TheNumberOfHubGenes.normal)
-head(results.Biocarta$TheNumberOfHubGenes.case)
-head(results.Biocarta$TheNumberOfEdges.normal)
-head(results.Biocarta$TheNumberOfEdges.case)
-head(results.Biocarta$PathwayName)
+names(results.PathBank)
+head(results.PathBank$Fishertest.p.value)
+head(results.PathBank$KStest.p.value) 
+head(results.PathBank$LengthOfPathway)
+head(results.PathBank$TheNumberOfHubGenes.normal)
+head(results.PathBank$TheNumberOfHubGenes.case)
+head(results.PathBank$TheNumberOfEdges.normal)
+head(results.PathBank$TheNumberOfEdges.case)
+head(results.PathBank$PathwayName)
 
 ```
 
